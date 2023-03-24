@@ -2,10 +2,20 @@
 
 void	pieces_creator()
 {
+	int	i;
+
 	bishop_creator('w', 2);
 	bishop_creator('w', 5);
 	bishop_creator('b', 2);
 	bishop_creator('b', 5);
+	knight_creator('w', 1);
+	knight_creator('w', 6);
+	knight_creator('b', 1);
+	knight_creator('b', 6);
+	queen_creator('b', 3);
+	queen_creator('w', 3);
+	for (i = 0, i < 8, i++;)
+		printf("%d\n", i);
 }
 
 void	select_piece(int x, int y)
@@ -39,6 +49,12 @@ int	move(int button, int x, int y, void *a)
 	return (0);
 }
 
+int	end(void *a)
+{
+	//free_all
+	exit(0);
+}
+
 int	main()
 {
 	(all())->mlx = mlx_init();
@@ -48,5 +64,6 @@ int	main()
 	pieces_creator();
 	paint();
 	mlx_hook((all())->wind, 4, (1L<<2), move, NULL);
+	mlx_hook((all())->wind, 17, 0, end, NULL);
 	mlx_loop((all())->mlx);
 }

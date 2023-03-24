@@ -7,7 +7,9 @@ SRCS = 	main.c \
 		utils.c \
 		t_piece.c
 
-SRCS_PCS =	bishop.c
+SRCS_PCS =	bishop.c \
+			knight.c \
+			queen.c
 
 SRCS_PCS_F = $(addprefix Pieces/, $(SRCS_PCS))
 

@@ -50,3 +50,30 @@ int	is_there_piece_diagonal(t_piece *piece, int x, int y)
 	}
 	return (0);
 }
+
+int	is_there_piece_same_line(t_piece *piece, int x, int y)
+{
+	if (is_piece(x, y, piece->color))
+		return (1);
+	if (y == piece->y)
+	{
+		x += ((x < piece->x) - (x > piece->x));
+		while (x != piece->x)
+		{
+			if (is_piece(x, y, 0))
+				return (1);
+			x += ((x < piece->x) - (x > piece->x));
+		}
+	}
+	else if (x == piece->x)
+	{
+		y += ((y < piece->y) - (y > piece->y));
+		while (y != piece->y)
+		{
+			if (is_piece(x, y, 0))
+				return (1);
+			y += ((y < piece->y) - (y > piece->y));
+		}
+	}
+	return (0);
+}

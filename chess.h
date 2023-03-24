@@ -25,6 +25,7 @@ typedef struct s_piece
 	int		y;
 	t_img	img;
 	char	color;
+	int		moves;
 	void (*display)(struct s_piece *self);
 	int	(*move)(struct s_piece *self, int x, int y);
 	struct s_piece *next;
@@ -45,9 +46,13 @@ void	paint_floor();
 void	add_piece(t_piece *to_add);
 t_img	image_creator(char *path);
 void	display_piece(t_piece *piece);
-void	bishop_creator(char color, int x);
 void	paint();
 int		modulo(int x);
 int		is_there_piece_diagonal(t_piece *piece, int x, int y);
+int		is_there_piece_same_line(t_piece *piece, int x, int y);
 int		is_piece(int x, int y, char color);
+
+void	knight_creator(char color, int x);
+void	bishop_creator(char color, int x);
+void	queen_creator(char color, int x);
 #endif

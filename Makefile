@@ -5,7 +5,8 @@ COMPILER = cc -Wall -Werror -Wextra
 SRCS = 	main.c \
 		paint.c \
 		utils.c \
-		t_piece.c
+		t_piece.c \
+		free.c
 
 SRCS_PCS =	bishop.c \
 			knight.c \

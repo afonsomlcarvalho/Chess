@@ -60,7 +60,7 @@ int	move(int button, int x, int y, void *a)
 
 int	end(void *a)
 {
-	//free_all
+	free_all();
 	exit(0);
 }
 

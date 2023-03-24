@@ -51,6 +51,7 @@ int		modulo(int x);
 int		is_there_piece_diagonal(t_piece *piece, int x, int y);
 int		is_there_piece_same_line(t_piece *piece, int x, int y);
 int		is_piece(int x, int y, char color);
+void	free_all();
 
 void	knight_creator(char color, int x);
 void	bishop_creator(char color, int x);

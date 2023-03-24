@@ -47,4 +47,7 @@ t_img	image_creator(char *path);
 void	display_piece(t_piece *piece);
 void	bishop_creator(char color, int x);
 void	paint();
+int		modulo(int x);
+int		is_there_piece_diagonal(t_piece *piece, int x, int y);
+int		is_piece(int x, int y, char color);
 #endif

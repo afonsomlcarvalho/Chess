@@ -8,9 +8,34 @@ void	pieces_creator()
 	bishop_creator('b', 5);
 }
 
+void	select_piece(int x, int y)
+{
+	t_piece	*cur;
+
+	cur = (all())->pieces;
+	while (cur)
+	{
+		if (cur->x == x && cur->y == y)
+		{
+			(all())->selected_piece = cur;
+			(all())->selected = 1;
+			return ;
+		}
+		cur = cur->next;
+	}
+	printf("Select a piece.\n");
+}
+
 int	move(int button, int x, int y, void *a)
 {
-	printf("button: %d\nx: %d\n y: %d\n", button, x, y);
+	if (button == 1 && !(all())->selected)
+		select_piece(x / 60, y / 60);
+	else if (button == 1)
+	{
+		(all())->selected_piece->move((all())->selected_piece, x / 60, y / 60);
+		(all())->selected = 0;
+	}
+	paint();
 	return (0);
 }
 

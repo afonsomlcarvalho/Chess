@@ -68,11 +68,14 @@ void	display_piece(t_piece *piece)
 
 void	paint()
 {
+	t_piece	*cur;
+
 	paint_floor();
-	while ((all())->pieces)
+	cur = (all())->pieces;
+	while (cur)
 	{
-		(all())->pieces->display((all())->pieces);
-		(all())->pieces = (all())->pieces->next;
+		cur->display(cur);
+		cur = cur->next;
 	}
 	mlx_put_image_to_window((all())->mlx, (all())->wind, (all())->canva.img, 0, 0);
 }

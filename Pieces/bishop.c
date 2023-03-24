@@ -2,14 +2,14 @@
 
 int	bishop_move(t_piece *bishop, int x, int y)
 {
-	if (bishop->x - x == bishop->y - y)
+	if (modulo(bishop->x - x) == modulo(bishop->y - y) && !is_there_piece_diagonal(bishop, x, y))
 	{
 		bishop->x = x;
 		bishop->y = y;
 		return (1);
 	}
 	else
-		printf("Bishop can not move there");
+		printf("Bishop can not move there.\n");
 	return (0);
 }
 

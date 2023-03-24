@@ -19,6 +19,12 @@ void	pieces_creator()
 		pawn_creator('b', i);
 		pawn_creator('w', i);
 	}
+	rook_creator('w', 0);
+	rook_creator('w', 7);
+	rook_creator('b', 0);
+	rook_creator('b', 7);
+	king_creator('w', 4);
+	king_creator('b', 4);
 }
 
 void	select_piece(int x, int y)

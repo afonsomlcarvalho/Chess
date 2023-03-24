@@ -10,7 +10,9 @@ SRCS = 	main.c \
 SRCS_PCS =	bishop.c \
 			knight.c \
 			queen.c \
-			pawn.c
+			pawn.c \
+			rook.c \
+			king.c
 
 SRCS_PCS_F = $(addprefix Pieces/, $(SRCS_PCS))
 

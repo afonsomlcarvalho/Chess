@@ -56,4 +56,7 @@ void	knight_creator(char color, int x);
 void	bishop_creator(char color, int x);
 void	queen_creator(char color, int x);
 void	pawn_creator(char color, int x);
+void	rook_creator(char color, int x);
+void	king_creator(char color, int x);
+
 #endif

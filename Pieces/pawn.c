@@ -2,10 +2,17 @@
 
 int	pawn_move(t_piece *pawn, int x, int y)
 {
-	if ()
+	if (((x == pawn->x && \
+	((pawn->color == 'w' && pawn->y > y && pawn->y <= y + 1 + (pawn->moves == 0)) ||
+	(pawn->color == 'b' && pawn->y < y && pawn->y >= y - 1 - (pawn->moves == 0)))) ||
+	(modulo(x - pawn->x) == 1 && \
+	((pawn->color == 'w' && pawn->y == y + 1 && is_piece(x, y, 'b')) ||
+	(pawn->color == 'b' && pawn->y == y - 1 && is_piece(x, y, 'w'))))) &&\
+	!is_there_piece_same_line(pawn, x, y))
 	{
 		pawn->x = x;
 		pawn->y = y;
+		pawn->moves++;
 		return (1);
 	}
 	else
@@ -28,5 +35,6 @@ void	pawn_creator(char color, int x)
 	pawn->color = color;
 	pawn->move = pawn_move;
 	pawn->next = NULL;
+	pawn->moves = 0;
 	add_piece(pawn);
 }

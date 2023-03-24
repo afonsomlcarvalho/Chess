@@ -14,8 +14,11 @@ void	pieces_creator()
 	knight_creator('b', 6);
 	queen_creator('b', 3);
 	queen_creator('w', 3);
-	for (i = 0, i < 8, i++;)
-		printf("%d\n", i);
+	for (i = 0; i < 8; i++)
+	{
+		pawn_creator('b', i);
+		pawn_creator('w', i);
+	}
 }
 
 void	select_piece(int x, int y)

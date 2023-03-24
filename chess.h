@@ -55,4 +55,5 @@ int		is_piece(int x, int y, char color);
 void	knight_creator(char color, int x);
 void	bishop_creator(char color, int x);
 void	queen_creator(char color, int x);
+void	pawn_creator(char color, int x);
 #endif

@@ -20,7 +20,7 @@ int	pawn_range(t_piece *pawn, int x, int y, int flag)
 		pawn->x = x;
 		pawn->y = y;
 	}
-	if (!flag && king_in_check(pawn->color))
+	if (!flag && king_in_check(pawn->color, x, y))
 	{
 		pawn->x = x0;
 		pawn->y = y0;

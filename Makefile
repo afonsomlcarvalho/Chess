@@ -6,7 +6,8 @@ SRCS = 	main.c \
 		paint.c \
 		utils.c \
 		t_piece.c \
-		free.c
+		free.c \
+		castle.c
 
 SRCS_PCS =	bishop.c \
 			knight.c \

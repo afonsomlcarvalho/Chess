@@ -15,7 +15,7 @@ int	queen_range(t_piece *queen, int x, int y, int flag)
 		queen->x = x;
 		queen->y = y;
 	}
-	if (!flag && king_in_check(queen->color))
+	if (!flag && king_in_check(queen->color, x, y))
 	{
 		queen->x = x0;
 		queen->y = y0;

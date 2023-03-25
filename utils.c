@@ -78,7 +78,7 @@ int	is_there_piece_same_line(t_piece *piece, int x, int y)
 	return (0);
 }
 
-int	king_in_check(int color)
+int	king_in_check(int color, int x, int y)
 {
 	t_piece	*king;
 	t_piece	*cur;
@@ -93,7 +93,7 @@ int	king_in_check(int color)
 	cur = (all())->pieces;
 	while (cur)
 	{
-		if (cur->color == !king->color && cur->move(cur, king->x, king->y, 1))
+		if ((cur->x != x || cur->y != y) && cur->color == !king->color && cur->move(cur, king->x, king->y, 1))
 			return (1);
 		cur = cur->next;
 	}

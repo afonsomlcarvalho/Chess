@@ -14,7 +14,7 @@ int	bishop_range(t_piece *bishop, int x, int y, int flag)
 		bishop->x = x;
 		bishop->y = y;
 	}
-	if (!flag && king_in_check(bishop->color))
+	if (!flag && king_in_check(bishop->color, x, y))
 	{
 		bishop->x = x0;
 		bishop->y = y0;

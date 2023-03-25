@@ -14,7 +14,7 @@ int	knight_range(t_piece *knight, int x, int y, int flag)
 		knight->x = x;
 		knight->y = y;
 	}
-	if (!flag && king_in_check(knight->color))
+	if (!flag && king_in_check(knight->color, x, y))
 	{
 		knight->x = x0;
 		knight->y = y0;

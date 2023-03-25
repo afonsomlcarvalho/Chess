@@ -16,7 +16,9 @@ int	king_range(t_piece *king, int x, int y, int flag)
 		king->x = x;
 		king->y = y;
 	}
-	if (!flag && king_in_check(king->color))
+	if (!flag && king->moves == 0 && modulo(king->x - x) == 2 && king->y == y)
+		check_castle(king, x, y);
+	if (!flag && king_in_check(king->color, x, y))
 	{
 		king->x = x0;
 		king->y = y0;

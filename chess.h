@@ -57,8 +57,9 @@ int		modulo(int x);
 int		is_there_piece_diagonal(t_piece *piece, int x, int y);
 int		is_there_piece_same_line(t_piece *piece, int x, int y);
 int		is_piece(int x, int y, int color);
-int		king_in_check(int color);
+int		king_in_check(int color, int x, int y);
 void	eat(int x, int y, int color);
+void	check_castle(t_piece *king, int x, int y);
 void	free_all();
 
 void	knight_creator(int color, int x);

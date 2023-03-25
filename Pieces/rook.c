@@ -14,7 +14,7 @@ int	rook_range(t_piece *rook, int x, int y, int flag)
 		rook->x = x;
 		rook->y = y;
 	}
-	if (!flag && king_in_check(rook->color))
+	if (!flag && king_in_check(rook->color, x, y))
 	{
 		rook->x = x0;
 		rook->y = y0;

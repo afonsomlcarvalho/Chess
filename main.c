@@ -36,6 +36,14 @@ void	select_piece(int x, int y)
 	{
 		if (cur->x == x && cur->y == y)
 		{
+			if (cur->color != (all())->turn)
+			{
+				if (!cur->color)
+					printf("It's black's turn.\n");
+				else
+					printf("It's whithe's turn.\n");
+				return ;
+			}
 			(all())->selected_piece = cur;
 			(all())->selected = 1;
 			printf("%s selected.\n", cur->name);
@@ -60,6 +68,7 @@ int	move(int button, int x, int y, void *a)
 			(all())->selected_piece->moves++;
 			if (is_piece(x / 60, y / 60, !(all())->selected_piece->color))
 				eat(x / 60, y / 60, !(all())->selected_piece->color);
+			(all())->turn = (all())->turn == 0;
 		}
 		else
 			printf("%s can not move there.\n", (all())->selected_piece->name);

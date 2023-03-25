@@ -40,6 +40,7 @@ typedef struct	s_all
 	t_img	canva;
 	t_piece	*pieces;
 	int		selected;
+	int		turn;
 	t_piece	*selected_piece;
 }				t_all;
 

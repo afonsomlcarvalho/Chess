@@ -19,6 +19,8 @@ int	knight_range(t_piece *knight, int x, int y, int flag)
 		knight->x = x0;
 		knight->y = y0;
 	}
+	if (knight->x == x && knight->y == y)
+		(all())->en_passant = 0;
 	return (knight->x == x && knight->y == y);
 }
 

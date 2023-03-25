@@ -20,11 +20,17 @@ int	pawn_range(t_piece *pawn, int x, int y, int flag)
 		pawn->x = x;
 		pawn->y = y;
 	}
+	if ((all())->en_passant && modulo(pawn->x - x) == 1 && pawn->y - y == (!pawn->color - pawn->color) && pawn->y == 3 + pawn->color)
+		check_en_passant(pawn, x, y);
 	if (!flag && king_in_check(pawn->color, x, y))
 	{
 		pawn->x = x0;
 		pawn->y = y0;
 	}
+	if (modulo(pawn->y - y0) == 2)
+		(all())->en_passant = 1;
+	else if (pawn->x == x && pawn->y == y)
+		(all())->en_passant = 0;
 	return (pawn->x == x && pawn->y == y);
 }
 

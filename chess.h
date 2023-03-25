@@ -41,6 +41,7 @@ typedef struct	s_all
 	t_piece	*pieces;
 	int		selected;
 	int		turn;
+	int		en_passant;
 	t_piece	*selected_piece;
 }				t_all;
 
@@ -60,6 +61,7 @@ int		is_piece(int x, int y, int color);
 int		king_in_check(int color, int x, int y);
 void	eat(int x, int y, int color);
 void	check_castle(t_piece *king, int x, int y);
+void	check_en_passant(t_piece *pawn, int x, int y);
 void	free_all();
 
 void	knight_creator(int color, int x);

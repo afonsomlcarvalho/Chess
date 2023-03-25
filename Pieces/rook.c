@@ -19,6 +19,8 @@ int	rook_range(t_piece *rook, int x, int y, int flag)
 		rook->x = x0;
 		rook->y = y0;
 	}
+	if (rook->x == x && rook->y == y)
+		(all())->en_passant = 0;
 	return (rook->x == x && rook->y == y);
 }
 

@@ -23,6 +23,8 @@ int	king_range(t_piece *king, int x, int y, int flag)
 		king->x = x0;
 		king->y = y0;
 	}
+	if (king->x == x && king->y == y)
+		(all())->en_passant = 0;
 	return (king->x == x && king->y == y);
 }
 

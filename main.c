@@ -58,6 +58,8 @@ int	move(int button, int x, int y, void *a)
 		{
 			(all())->selected = 0;
 			(all())->selected_piece->moves++;
+			if (is_piece(x / 60, y / 60, !(all())->selected_piece->color))
+				eat(x / 60, y / 60, !(all())->selected_piece->color);
 		}
 		else
 			printf("%s can not move there.\n", (all())->selected_piece->name);

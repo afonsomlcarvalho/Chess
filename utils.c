@@ -99,3 +99,23 @@ int	king_in_check(int color)
 	}
 	return (0);
 }
+
+void	eat(int x, int y, int color)
+{
+	t_piece	*cur;
+	t_piece	*temp;
+
+	cur = (all())->pieces;
+	while (cur->next)
+	{
+		if (cur->next->color == color && cur->next->x == x && cur->next->y == y)
+		{
+			temp = cur->next->next;
+			mlx_destroy_image((all())->mlx, cur->next->img.img);
+			free(cur->next);
+			cur->next = temp;
+			break ;
+		}
+		cur = cur->next;
+	}
+}

@@ -13,7 +13,6 @@ int	rook_range(t_piece *rook, int x, int y, int flag)
 			return (1);
 		rook->x = x;
 		rook->y = y;
-		rook->moves++;
 	}
 	if (!flag && king_in_check(rook->color))
 	{

@@ -4,27 +4,27 @@ void	pieces_creator()
 {
 	int	i;
 
-	bishop_creator('w', 2);
-	bishop_creator('w', 5);
-	bishop_creator('b', 2);
-	bishop_creator('b', 5);
-	knight_creator('w', 1);
-	knight_creator('w', 6);
-	knight_creator('b', 1);
-	knight_creator('b', 6);
-	queen_creator('b', 3);
-	queen_creator('w', 3);
+	bishop_creator(WHITE, 2);
+	bishop_creator(WHITE, 5);
+	bishop_creator(BLACK, 2);
+	bishop_creator(BLACK, 5);
+	knight_creator(WHITE, 1);
+	knight_creator(WHITE, 6);
+	knight_creator(BLACK, 1);
+	knight_creator(BLACK, 6);
+	queen_creator(BLACK, 3);
+	queen_creator(WHITE, 3);
 	for (i = 0; i < 8; i++)
 	{
-		pawn_creator('b', i);
-		pawn_creator('w', i);
+		pawn_creator(BLACK, i);
+		pawn_creator(WHITE, i);
 	}
-	rook_creator('w', 0);
-	rook_creator('w', 7);
-	rook_creator('b', 0);
-	rook_creator('b', 7);
-	king_creator('w', 4);
-	king_creator('b', 4);
+	rook_creator(WHITE, 0);
+	rook_creator(WHITE, 7);
+	rook_creator(BLACK, 0);
+	rook_creator(BLACK, 7);
+	king_creator(WHITE, 4);
+	king_creator(BLACK, 4);
 }
 
 void	select_piece(int x, int y)
@@ -38,6 +38,7 @@ void	select_piece(int x, int y)
 		{
 			(all())->selected_piece = cur;
 			(all())->selected = 1;
+			printf("%s selected.\n", cur->name);
 			return ;
 		}
 		cur = cur->next;
@@ -51,8 +52,15 @@ int	move(int button, int x, int y, void *a)
 		select_piece(x / 60, y / 60);
 	else if (button == 1)
 	{
-		(all())->selected_piece->move((all())->selected_piece, x / 60, y / 60);
-		(all())->selected = 0;
+		if (is_piece(x / 60, y / 60, (all())->selected_piece->color))
+			select_piece(x / 60, y / 60);
+		else if ((all())->selected_piece->move((all())->selected_piece, x / 60, y / 60, 0))
+		{
+			(all())->selected = 0;
+			(all())->selected_piece->moves++;
+		}
+		else
+			printf("%s can not move there.\n", (all())->selected_piece->name);
 	}
 	paint();
 	return (0);

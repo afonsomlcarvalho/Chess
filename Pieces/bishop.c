@@ -1,32 +1,42 @@
 #include "../chess.h"
 
-int	bishop_move(t_piece *bishop, int x, int y)
+int	bishop_range(t_piece *bishop, int x, int y, int flag)
 {
+	int	x0;
+	int	y0;
+
+	x0 = bishop->x;
+	y0 = bishop->y;
 	if (modulo(bishop->x - x) == modulo(bishop->y - y) && !is_there_piece_diagonal(bishop, x, y))
 	{
+		if (flag)
+			return (1);
 		bishop->x = x;
 		bishop->y = y;
-		return (1);
 	}
-	else
-		printf("Bishop can not move there.\n");
-	return (0);
+	if (!flag && king_in_check(bishop->color))
+	{
+		bishop->x = x0;
+		bishop->y = y0;
+	}
+	return (bishop->x == x && bishop->y == y);
 }
 
-void	bishop_creator(char color, int x)
+void	bishop_creator(int color, int x)
 {
 	t_piece	*bishop;
 
 	bishop = malloc(sizeof(t_piece));
 	bishop->x = x;
-	bishop->y = 7 * (color == 'w');
-	if (color == 'w')
+	bishop->y = 7 * (color == WHITE);
+	if (color == WHITE)
 		bishop->img = image_creator("Images/WB.xpm");
 	else
 		bishop->img = image_creator("Images/BB.xpm");
 	bishop->display = display_piece;
 	bishop->color = color;
-	bishop->move = bishop_move;
+	bishop->move = bishop_range;
+	bishop->name = "Bishop";
 	bishop->next = NULL;
 	add_piece(bishop);
 }

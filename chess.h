@@ -5,6 +5,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <string.h>
 # include "mlx_linux/mlx.h"
 
 typedef struct s_img
@@ -24,10 +25,11 @@ typedef struct s_piece
 	int		x;
 	int		y;
 	t_img	img;
-	char	color;
+	int		color;
 	int		moves;
+	char	*name;
 	void (*display)(struct s_piece *self);
-	int	(*move)(struct s_piece *self, int x, int y);
+	int	(*move)(struct s_piece *self, int x, int y, int flag);
 	struct s_piece *next;
 }				t_piece;
 
@@ -41,6 +43,9 @@ typedef struct	s_all
 	t_piece	*selected_piece;
 }				t_all;
 
+# define WHITE 0
+# define BLACK 1
+
 t_all	*all(void);
 void	paint_floor();
 void	add_piece(t_piece *to_add);
@@ -50,14 +55,15 @@ void	paint();
 int		modulo(int x);
 int		is_there_piece_diagonal(t_piece *piece, int x, int y);
 int		is_there_piece_same_line(t_piece *piece, int x, int y);
-int		is_piece(int x, int y, char color);
+int		is_piece(int x, int y, int color);
+int		king_in_check(int color);
 void	free_all();
 
-void	knight_creator(char color, int x);
-void	bishop_creator(char color, int x);
-void	queen_creator(char color, int x);
-void	pawn_creator(char color, int x);
-void	rook_creator(char color, int x);
-void	king_creator(char color, int x);
+void	knight_creator(int color, int x);
+void	bishop_creator(int color, int x);
+void	queen_creator(int color, int x);
+void	pawn_creator(int color, int x);
+void	rook_creator(int color, int x);
+void	king_creator(int color, int x);
 
 #endif

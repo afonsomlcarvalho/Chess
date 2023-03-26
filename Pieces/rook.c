@@ -24,13 +24,13 @@ int	rook_range(t_piece *rook, int x, int y, int flag)
 	return (rook->x == x && rook->y == y);
 }
 
-void	rook_creator(int color, int x)
+void	rook_creator(int color, int x, int y)
 {
 	t_piece	*rook;
 
 	rook = malloc(sizeof(t_piece));
 	rook->x = x;
-	rook->y = 7 * (color == WHITE);
+	rook->y = y;
 	if (color == WHITE)
 		rook->img = image_creator("Images/WR.xpm");
 	else

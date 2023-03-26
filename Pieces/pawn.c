@@ -27,16 +27,18 @@ int	pawn_range(t_piece *pawn, int x, int y, int flag)
 		(all())->en_passant = 1;
 	else if (!flag && pawn->x == x && pawn->y == y)
 		(all())->en_passant = 0;
+	if (!flag && pawn->y == 0)
+		(all())->pawn = 1;
 	return (pawn->x == x && pawn->y == y);
 }
 
-void	pawn_creator(int color, int x)
+void	pawn_creator(int color, int x, int y)
 {
 	t_piece	*pawn;
 
 	pawn = malloc(sizeof(t_piece));
 	pawn->x = x;
-	pawn->y = 1 + 5 * (color == WHITE);
+	pawn->y = y;
 	if (color == WHITE)
 		pawn->img = image_creator("Images/WP.xpm");
 	else

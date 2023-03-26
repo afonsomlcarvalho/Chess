@@ -28,13 +28,13 @@ int	king_range(t_piece *king, int x, int y, int flag)
 	return (king->x == x && king->y == y);
 }
 
-void	king_creator(int color, int x)
+void	king_creator(int color, int x, int y)
 {
 	t_piece	*king;
 
 	king = malloc(sizeof(t_piece));
 	king->x = x;
-	king->y = 7 * (color == WHITE);
+	king->y = y;
 	if (color == WHITE)
 		king->img = image_creator("Images/WKg.xpm");
 	else

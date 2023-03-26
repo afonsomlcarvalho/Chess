@@ -24,13 +24,13 @@ int	bishop_range(t_piece *bishop, int x, int y, int flag)
 	return (bishop->x == x && bishop->y == y);
 }
 
-void	bishop_creator(int color, int x)
+void	bishop_creator(int color, int x, int y)
 {
 	t_piece	*bishop;
 
 	bishop = malloc(sizeof(t_piece));
 	bishop->x = x;
-	bishop->y = 7 * (color == WHITE);
+	bishop->y = y;
 	if (color == WHITE)
 		bishop->img = image_creator("Images/WB.xpm");
 	else

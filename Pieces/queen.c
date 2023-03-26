@@ -25,13 +25,13 @@ int	queen_range(t_piece *queen, int x, int y, int flag)
 	return (queen->x == x && queen->y == y);
 }
 
-void	queen_creator(int color, int x)
+void	queen_creator(int color, int x, int y)
 {
 	t_piece	*queen;
 
 	queen = malloc(sizeof(t_piece));
 	queen->x = x;
-	queen->y = 7 * (color == WHITE);
+	queen->y = y;
 	if (color == WHITE)
 		queen->img = image_creator("Images/WQ.xpm");
 	else

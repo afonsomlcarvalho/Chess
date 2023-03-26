@@ -42,6 +42,7 @@ typedef struct	s_all
 	int		selected;
 	int		turn;
 	int		en_passant;
+	int		pawn;
 	t_piece	*selected_piece;
 }				t_all;
 
@@ -65,11 +66,11 @@ void	check_en_passant(t_piece *pawn, int x, int y);
 void	check();
 void	free_all();
 
-void	knight_creator(int color, int x);
-void	bishop_creator(int color, int x);
-void	queen_creator(int color, int x);
-void	pawn_creator(int color, int x);
-void	rook_creator(int color, int x);
-void	king_creator(int color, int x);
+void	knight_creator(int color, int x, int y);
+void	bishop_creator(int color, int x, int y);
+void	queen_creator(int color, int x, int y);
+void	pawn_creator(int color, int x, int y);
+void	rook_creator(int color, int x, int y);
+void	king_creator(int color, int x, int y);
 
 #endif

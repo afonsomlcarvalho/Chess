@@ -24,13 +24,13 @@ int	knight_range(t_piece *knight, int x, int y, int flag)
 	return (knight->x == x && knight->y == y);
 }
 
-void	knight_creator(int color, int x)
+void	knight_creator(int color, int x, int y)
 {
 	t_piece	*knight;
 
 	knight = malloc(sizeof(t_piece));
 	knight->x = x;
-	knight->y = 7 * (color == WHITE);
+	knight->y = y;
 	if (color == WHITE)
 		knight->img = image_creator("Images/WKn.xpm");
 	else

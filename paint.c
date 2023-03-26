@@ -38,7 +38,14 @@ void	paint_floor()
 		x = 0;
 		while (x < 60 * 8)
 		{
-			if ((!((x / 60) % 2) && !((y / 60) % 2)) || (((x / 60) % 2) && ((y / 60) % 2)))
+			if ((all())->selected && x / 60 == (all())->selected_piece->x && y / 60 == (all())->selected_piece->y)
+				my_mlx_pixel_put(&(all())->canva, x, y, 0x00ff0000);
+			// else if ((all())->selected && (all())->selected_piece->move((all())->selected_piece, x / 60, y / 60, 1) && \
+			// ((!((x / 60) % 2) && !((y / 60) % 2)) || (((x / 60) % 2) && ((y / 60)% 2))))
+			// 	my_mlx_pixel_put(&(all())->canva, x, y, 0x0000ff00);
+			// else if ((all())->selected && (all())->selected_piece->move((all())->selected_piece, x / 60, y / 60, 1))
+			// 	my_mlx_pixel_put(&(all())->canva, x, y, 0x0000cc00);
+			else if ((!((x / 60) % 2) && !((y / 60) % 2)) || (((x / 60) % 2) && ((y / 60)% 2)))
 				my_mlx_pixel_put(&(all())->canva, x, y, 0x00ffce9e);
 			else
 				my_mlx_pixel_put(&(all())->canva, x, y, 0x00d18b47);

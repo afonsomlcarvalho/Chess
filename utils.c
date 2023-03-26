@@ -35,9 +35,9 @@ int	is_piece(int x, int y, int color)
 	return (0);
 }
 
-int	is_there_piece_diagonal(t_piece *piece, int x, int y)
+int	is_there_piece_diagonal(t_piece *piece, int x, int y, int flag)
 {
-	if (is_piece(x, y, piece->color))
+	if (!flag && is_piece(x, y, piece->color))
 		return (1);
 	x += ((x < piece->x) - (x > piece->x));
 	y += ((y < piece->y) - (y > piece->y));
@@ -51,9 +51,9 @@ int	is_there_piece_diagonal(t_piece *piece, int x, int y)
 	return (0);
 }
 
-int	is_there_piece_same_line(t_piece *piece, int x, int y)
+int	is_there_piece_same_line(t_piece *piece, int x, int y, int flag)
 {
-	if (is_piece(x, y, piece->color))
+	if (!flag && is_piece(x, y, piece->color))
 		return (1);
 	if (y == piece->y)
 	{
@@ -78,34 +78,19 @@ int	is_there_piece_same_line(t_piece *piece, int x, int y)
 	return (0);
 }
 
-int	king_in_check(int color, int x, int y)
-{
-	t_piece	*king;
-	t_piece	*cur;
-
-	king = (all())->pieces;
-	while (king)
-	{
-		if (king->color == color && !strncmp(king->name, "King", strlen(king->name)))
-			break ;
-		king = king->next;
-	}
-	cur = (all())->pieces;
-	while (cur)
-	{
-		if ((cur->x != x || cur->y != y) && cur->color == !king->color && cur->move(cur, king->x, king->y, 1))
-			return (1);
-		cur = cur->next;
-	}
-	return (0);
-}
-
 void	eat(int x, int y, int color)
 {
 	t_piece	*cur;
 	t_piece	*temp;
 
 	cur = (all())->pieces;
+	if (cur->color == color && cur->x == x && cur->y == y)
+	{
+		(all())->pieces = cur->next;
+		mlx_destroy_image((all())->mlx, cur->img.img);
+		free(cur);
+		return ;
+	}
 	while (cur->next)
 	{
 		if (cur->next->color == color && cur->next->x == x && cur->next->y == y)

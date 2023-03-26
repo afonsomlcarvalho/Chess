@@ -7,29 +7,25 @@ int	pawn_range(t_piece *pawn, int x, int y, int flag)
 
 	x0 = pawn->x;
 	y0 = pawn->y;
-	if (((x == pawn->x && \
-	((pawn->color == WHITE && pawn->y > y && pawn->y <= y + 1 + (pawn->moves == 0)) ||
-	(pawn->color == BLACK && pawn->y < y && pawn->y >= y - 1 - (pawn->moves == 0)))) ||
-	(modulo(x - pawn->x) == 1 && \
-	((pawn->color == WHITE && pawn->y == y + 1 && is_piece(x, y, BLACK)) ||
-	(pawn->color == BLACK && pawn->y == y - 1 && is_piece(x, y, WHITE))))) &&\
-	!is_there_piece_same_line(pawn, x, y))
+	if ((x == pawn->x && !is_piece(x, pawn->y - 1, -1) && y >= (pawn->y - 1 - (pawn->moves == 0))\
+		 && y < pawn->y &&(modulo(pawn->y - y) == 1 || !is_piece(x, y, -1))) || \
+		(modulo(x - pawn->x) == 1) && is_piece(x, y, !pawn->color) && pawn->y == y + 1)
 	{
 		if (flag == 1)
 			return (1);
 		pawn->x = x;
 		pawn->y = y;
 	}
-	if ((all())->en_passant && modulo(pawn->x - x) == 1 && pawn->y - y == (!pawn->color - pawn->color) && pawn->y == 3 + pawn->color)
+	if ((all())->en_passant && modulo(pawn->x - x) == 1 && pawn->y - y == 1 && pawn->y == 3)
 		check_en_passant(pawn, x, y);
 	if (!flag && king_in_check(pawn->color, x, y))
 	{
 		pawn->x = x0;
 		pawn->y = y0;
 	}
-	if (modulo(pawn->y - y0) == 2)
+	if (!flag && modulo(pawn->y - y0) == 2)
 		(all())->en_passant = 1;
-	else if (pawn->x == x && pawn->y == y)
+	else if (!flag && pawn->x == x && pawn->y == y)
 		(all())->en_passant = 0;
 	return (pawn->x == x && pawn->y == y);
 }

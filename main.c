@@ -41,7 +41,14 @@ void	select_piece(int x, int y)
 				if (!cur->color)
 					printf("It's black's turn.\n");
 				else
-					printf("It's whithe's turn.\n");
+					printf("It's white's turn.\n");
+				return ;
+			}
+			if ((all())->selected_piece && cur->x == (all())->selected_piece->x && cur->y == (all())->selected_piece->y)
+			{
+				(all())->selected = 0;
+				(all())->selected_piece = 0;
+				printf("%s deselected.\n", cur->name);
 				return ;
 			}
 			(all())->selected_piece = cur;
@@ -52,6 +59,20 @@ void	select_piece(int x, int y)
 		cur = cur->next;
 	}
 	printf("Select a piece.\n");
+}
+
+void	new_turn()
+{
+	t_piece *cur;
+
+	cur = (all())->pieces;
+	(all())->turn = (all())->turn == 0;
+	while(cur)
+	{
+		cur->x = 7 - cur->x;
+		cur->y = 7 - cur->y;
+		cur = cur->next;
+	}
 }
 
 int	move(int button, int x, int y, void *a)
@@ -68,7 +89,8 @@ int	move(int button, int x, int y, void *a)
 			(all())->selected_piece->moves++;
 			if (is_piece(x / 60, y / 60, !(all())->selected_piece->color))
 				eat(x / 60, y / 60, !(all())->selected_piece->color);
-			(all())->turn = (all())->turn == 0;
+			check();
+			new_turn();
 		}
 		else
 			printf("%s can not move there.\n", (all())->selected_piece->name);

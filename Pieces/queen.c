@@ -8,7 +8,7 @@ int	queen_range(t_piece *queen, int x, int y, int flag)
 	x0 = queen->x;
 	y0 = queen->y;
 	if ((modulo(queen->x - x) == modulo(queen->y - y) || queen->y == y || queen->x == x) && \
-	!is_there_piece_diagonal(queen, x, y) && !is_there_piece_same_line(queen, x, y))
+	!is_there_piece_diagonal(queen, x, y, flag) && !is_there_piece_same_line(queen, x, y, flag))
 	{
 		if (flag == 1)
 			return (1);

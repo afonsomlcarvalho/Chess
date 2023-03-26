@@ -8,7 +8,7 @@ int	king_range(t_piece *king, int x, int y, int flag)
 	x0 = king->x;
 	y0 = king->y;
 	if ((modulo(king->x - x) == modulo(king->y - y) || king->y == y || king->x == x) && \
-	!is_there_piece_diagonal(king, x, y) && !is_there_piece_same_line(king, x, y) && \
+	!is_there_piece_diagonal(king, x, y, flag) && !is_there_piece_same_line(king, x, y, flag) && \
 	modulo(king->x - x) <= 1 && modulo(king->y - y) <= 1)
 	{
 		if (flag == 1)

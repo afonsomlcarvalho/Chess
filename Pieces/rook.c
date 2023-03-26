@@ -7,7 +7,7 @@ int	rook_range(t_piece *rook, int x, int y, int flag)
 
 	x0 = rook->x;
 	y0 = rook->y;
-	if ((rook->y == y || rook->x == x) && !is_there_piece_same_line(rook, x, y))
+	if ((rook->y == y || rook->x == x) && !is_there_piece_same_line(rook, x, y, flag))
 	{
 		if (flag)
 			return (1);

@@ -7,7 +7,7 @@ int	bishop_range(t_piece *bishop, int x, int y, int flag)
 
 	x0 = bishop->x;
 	y0 = bishop->y;
-	if (modulo(bishop->x - x) == modulo(bishop->y - y) && !is_there_piece_diagonal(bishop, x, y))
+	if (modulo(bishop->x - x) == modulo(bishop->y - y) && !is_there_piece_diagonal(bishop, x, y, flag))
 	{
 		if (flag)
 			return (1);

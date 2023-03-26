@@ -20,7 +20,7 @@ int	no_threat(t_piece *king, int x, int y)
 	int	i;
 	t_piece	*cur;
 
-	for (i = 1 + 4 * (x > king->x); i < 4 + 3 * (x > king->x); i++)
+	for (i = 2 + 3 * (x > king->x); i < 4 + 3 * (x > king->x); i++)
 	{
 		cur = (all())->pieces;
 		while (cur)

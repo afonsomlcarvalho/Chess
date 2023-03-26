@@ -8,7 +8,8 @@ SRCS = 	main.c \
 		t_piece.c \
 		free.c \
 		castle.c \
-		en_passant.c
+		en_passant.c \
+		check.c
 
 SRCS_PCS =	bishop.c \
 			knight.c \

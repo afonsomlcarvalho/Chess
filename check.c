@@ -64,7 +64,7 @@ void	check()
 	if (!check_all_possibilities(!(all())->selected_piece->color) && king_in_check(!(all())->selected_piece->color, -1, -1))
 		printf("Checkmate!\n");
 	else if (!check_all_possibilities(!(all())->selected_piece->color))
-		printf("Stalemate");
+		printf("Stalemate!\n");
 	else if (king_in_check(!(all())->selected_piece->color, -1, -1))
 		printf("Check!\n");
 }

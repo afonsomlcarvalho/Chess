@@ -4,25 +4,25 @@ void	pieces_creator()
 {
 	int	i;
 
-	// bishop_creator(WHITE, 2, 7);
-	// bishop_creator(WHITE, 5, 7);
-	// bishop_creator(BLACK, 2, 0);
-	// bishop_creator(BLACK, 5, 0);
-	// knight_creator(WHITE, 1, 7);
-	// knight_creator(WHITE, 6, 7);
-	// knight_creator(BLACK, 1, 0);
-	// knight_creator(BLACK, 6, 0);
-	// queen_creator(BLACK, 3, 0);
-	// queen_creator(WHITE, 3, 7);
+	bishop_creator(WHITE, 2, 7);
+	bishop_creator(WHITE, 5, 7);
+	bishop_creator(BLACK, 2, 0);
+	bishop_creator(BLACK, 5, 0);
+	knight_creator(WHITE, 1, 7);
+	knight_creator(WHITE, 6, 7);
+	knight_creator(BLACK, 1, 0);
+	knight_creator(BLACK, 6, 0);
+	queen_creator(BLACK, 3, 0);
+	queen_creator(WHITE, 3, 7);
 	for (i = 0; i < 8; i++)
 	{
-		// pawn_creator(BLACK, i, 1);
-		pawn_creator(WHITE, i, 3);
+		pawn_creator(BLACK, i, 1);
+		pawn_creator(WHITE, i, 6);
 	}
-	// rook_creator(WHITE, 0, 7);
-	// rook_creator(WHITE, 7, 7);
-	// rook_creator(BLACK, 0, 0);
-	// rook_creator(BLACK, 7, 0);
+	rook_creator(WHITE, 0, 7);
+	rook_creator(WHITE, 7, 7);
+	rook_creator(BLACK, 0, 0);
+	rook_creator(BLACK, 7, 0);
 	king_creator(WHITE, 4, 7);
 	king_creator(BLACK, 4, 0);
 }

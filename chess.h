@@ -44,6 +44,7 @@ typedef struct	s_all
 	int		en_passant;
 	int		pawn;
 	t_piece	*selected_piece;
+	t_img	pawn_pieces[8];
 }				t_all;
 
 # define WHITE 0

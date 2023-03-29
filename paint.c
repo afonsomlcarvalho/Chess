@@ -55,6 +55,24 @@ void	paint_floor()
 	}
 }
 
+void	display_image(t_img	img, int i, int j)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < 60)
+	{
+		x = 0;
+		while (x < 60)
+		{
+			put_pixel_img((all())->canva, x + i, y + j, get_color(img, x, y));
+			x++;
+		}
+		y++;
+	}
+}
+
 void	display_piece(t_piece *piece)
 {
 	int	x;
@@ -77,6 +95,7 @@ void	paint_pawn_menu()
 {
 	int	x;
 	int	y;
+	int	i;
 
 	y = 0;
 	while (y < 60 * 8)
@@ -94,7 +113,8 @@ void	paint_pawn_menu()
 		}
 		y++;
 	}
-	
+	for (i = 0; i < 4; i++)
+		display_image((all())->pawn_pieces[i + 4 * ((all())->selected_piece->color)], 150 + (i > 1) * 120, 150 + (i % 2) * 120);
 	mlx_put_image_to_window((all())->mlx, (all())->wind, (all())->canva.img, 0, 0);
 	mlx_string_put((all())->mlx, (all())->wind, 200, 90, 0x00ffffff, "Choose a piece:");
 }

@@ -7,8 +7,8 @@ int	check_pieces_in_between(t_piece *king, int x, int y)
 	cur = (all())->pieces;
 	while (cur)
 	{
-		if ((king->x > x && (cur->x == 1 || cur->x == 2 || cur->x == 3) && cur->y == y) || \
-			(king->x < x && (cur->x == 5 || cur->x == 6) && cur->y == y))
+		if ((king->x > x && (cur->x == 1 || cur->x == 2 || (cur->x == 3 && !king->color)) && cur->y == y) || \
+			(king->x < x && ((cur->x == 4 && king->color) || cur->x == 5 || cur->x == 6) && cur->y == y))
 			return (0);
 		cur = cur->next;
 	}
@@ -20,7 +20,7 @@ int	no_threat(t_piece *king, int x, int y)
 	int	i;
 	t_piece	*cur;
 
-	for (i = 2 + 3 * (x > king->x); i < 4 + 3 * (x > king->x); i++)
+	for (i = 2 + 3 * (x > king->x) - king->color; i < 4 + 3 * (x > king->x) - king->color; i++)
 	{
 		cur = (all())->pieces;
 		while (cur)

@@ -8,8 +8,8 @@ int	pawn_range(t_piece *pawn, int x, int y, int flag)
 	x0 = pawn->x;
 	y0 = pawn->y;
 	if ((x == pawn->x && !is_piece(x, pawn->y - 1, -1) && y >= (pawn->y - 1 - (pawn->moves == 0))\
-		 && y < pawn->y &&(modulo(pawn->y - y) == 1 || !is_piece(x, y, -1))) || \
-		(modulo(x - pawn->x) == 1) && is_piece(x, y, !pawn->color) && pawn->y == y + 1)
+		 && y < pawn->y && (modulo(pawn->y - y) == 1 || !is_piece(x, y, -1))) || \
+		(modulo(x - pawn->x) == 1) && is_piece(x, y, !pawn->color) && pawn->y == y + ((all())->turn == pawn->color) - ((all())->turn != pawn->color))
 	{
 		if (flag == 1)
 			return (1);

@@ -30,8 +30,10 @@ int	check_all_possibilities(int	color)
 	int	x0;
 	int	y0;
 	int	en_passant;
+	int	pawn;
 
 	en_passant = (all())->en_passant;
+	pawn = (all())->pawn;
 	cur = (all())->pieces;
 	while (cur)
 	{
@@ -43,11 +45,12 @@ int	check_all_possibilities(int	color)
 			x = 0;
 			while (x < 8)
 			{
-				if (cur->x != x && cur->y != y && cur->move(cur, x, y, 0))
+				if ((cur->x != x || cur->y != y) && cur->move(cur, x, y, 0))
 				{
 					cur->x = x0;
 					cur->y = y0;
 					(all())->en_passant = en_passant;
+					(all())->pawn = pawn;
 					return (1);
 				}
 				x++;

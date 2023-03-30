@@ -42,7 +42,7 @@ void	check_castle(t_piece *king, int x, int y)
 	{
 		if (rook->x == 7 * (king->x < x) && rook->y == y && rook->moves == 0 && \
 			check_pieces_in_between(king, x, y) && \
-			no_threat(king, x, y))
+			no_threat(king, x, y) && !king_in_check(king->color, -1, -1))
 		{
 			rook->x = x + ((x < king->x) - (x > king->x));
 			king->x = x;

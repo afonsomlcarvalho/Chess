@@ -41,5 +41,6 @@ void	queen_creator(int color, int x, int y)
 	queen->move = queen_range;
 	queen->name = "Queen";
 	queen->next = NULL;
+	queen->value = 9;
 	add_piece(queen);
 }

@@ -39,6 +39,7 @@ void	knight_creator(int color, int x, int y)
 	knight->color = color;
 	knight->move = knight_range;
 	knight->name = "Knight";
+	knight->value = 3;
 	knight->next = NULL;
 	add_piece(knight);
 }

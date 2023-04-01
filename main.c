@@ -150,6 +150,7 @@ int	main()
 	(all())->pawn_pieces[5] = image_creator("Images/BR.xpm");
 	(all())->pawn_pieces[6] = image_creator("Images/BB.xpm");
 	(all())->pawn_pieces[7] = image_creator("Images/BKn.xpm");
+	(all())->menu = 1;
 	pieces_creator();
 	paint();
 	mlx_hook((all())->wind, 4, (1L<<2), move, NULL);

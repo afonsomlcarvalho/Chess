@@ -119,10 +119,31 @@ void	paint_pawn_menu()
 	mlx_string_put((all())->mlx, (all())->wind, 200, 90, 0x00ffffff, "Choose a piece:");
 }
 
+void	paint_menu()
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < 60 * 12)
+	{
+		x = 0;
+		while (x < 60 * 12)
+		{
+			my_mlx_pixel_put(&(all())->canva, x, y, 0x00ffce9e);
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window((all())->mlx, (all())->wind, (all())->canva.img, x, y);
+}
+
 void	paint()
 {
 	t_piece	*cur;
 
+	if ((all())->menu)
+		return (paint_menu());
 	if ((all())->pawn)
 		return (paint_pawn_menu());
 	paint_floor();

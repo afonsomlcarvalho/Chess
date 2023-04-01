@@ -45,6 +45,7 @@ typedef struct	s_all
 	int		pawn;
 	t_piece	*selected_piece;
 	t_img	pawn_pieces[8];
+	int	menu;
 }				t_all;
 
 # define WHITE 0

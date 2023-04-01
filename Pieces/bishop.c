@@ -39,6 +39,7 @@ void	bishop_creator(int color, int x, int y)
 	bishop->color = color;
 	bishop->move = bishop_range;
 	bishop->name = "Bishop";
+	bishop->value = 3;
 	bishop->next = NULL;
 	add_piece(bishop);
 }

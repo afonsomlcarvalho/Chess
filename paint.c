@@ -39,16 +39,16 @@ void	paint_floor()
 		while (x < 60 * 8)
 		{
 			if ((all())->selected && x / 60 == (all())->selected_piece->x && y / 60 == (all())->selected_piece->y)
-				my_mlx_pixel_put(&(all())->canva, x, y, 0x00ff0000);
+				my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x0092e364);
 			// else if ((all())->selected && (all())->selected_piece->move((all())->selected_piece, x / 60, y / 60, 1) && \
 			// ((!((x / 60) % 2) && !((y / 60) % 2)) || (((x / 60) % 2) && ((y / 60)% 2))))
-			// 	my_mlx_pixel_put(&(all())->canva, x, y, 0x0000ff00);
+			// 	my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x009c7e60);
 			// else if ((all())->selected && (all())->selected_piece->move((all())->selected_piece, x / 60, y / 60, 1))
-			// 	my_mlx_pixel_put(&(all())->canva, x, y, 0x0000cc00);
+			// 	my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x007d532a);
 			else if ((!((x / 60) % 2) && !((y / 60) % 2)) || (((x / 60) % 2) && ((y / 60)% 2)))
-				my_mlx_pixel_put(&(all())->canva, x, y, 0x00ffce9e);
+				my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x00ffce9e);
 			else
-				my_mlx_pixel_put(&(all())->canva, x, y, 0x00d18b47);
+				my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x00d18b47);
 			x++;
 		}
 		y++;
@@ -78,13 +78,13 @@ void	display_piece(t_piece *piece)
 	int	x;
 	int	y;
 
-	y = 0;
-	while (y < 60)
+	y = 120;
+	while (y - 120 < 60)
 	{
-		x = 0;
-		while (x < 60)
+		x = 120;
+		while (x - 120 < 60)
 		{
-			put_pixel_img((all())->canva, x + piece->x * 60, y + piece->y * 60, get_color(piece->img, x, y));
+			put_pixel_img((all())->canva, x + piece->x * 60, y + piece->y * 60, get_color(piece->img, x - 120, y - 120));
 			x++;
 		}
 		y++;
@@ -104,19 +104,19 @@ void	paint_pawn_menu()
 		while (x < 60 * 8)
 		{
 			if ((x < 240 && x >= 120 && y >= 120 && y < 240) || (x >= 240 && x < 360 && y >= 240 && y < 360))
-				my_mlx_pixel_put(&(all())->canva, x, y, 0x00ffce9e);
+				my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x00ffce9e);
 			else if ((x >= 240 && x < 360 && y >= 120 && y < 240) || (x < 240 && x >= 120 && y >= 240 && y < 360))
-				my_mlx_pixel_put(&(all())->canva, x, y, 0x00d18b47);
+				my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x00d18b47);
 			else
-				my_mlx_pixel_put(&(all())->canva, x, y, 0x000000);
+				my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x000000);
 			x++;
 		}
 		y++;
 	}
 	for (i = 0; i < 4; i++)
-		display_image((all())->pawn_pieces[i + 4 * ((all())->selected_piece->color)], 150 + (i > 1) * 120, 150 + (i % 2) * 120);
+		display_image((all())->pawn_pieces[i + 4 * ((all())->selected_piece->color)], 270 + (i > 1) * 120, 270 + (i % 2) * 120);
 	mlx_put_image_to_window((all())->mlx, (all())->wind, (all())->canva.img, 0, 0);
-	mlx_string_put((all())->mlx, (all())->wind, 200, 90, 0x00ffffff, "Choose a piece:");
+	mlx_string_put((all())->mlx, (all())->wind, 320, 210, 0x00ffffff, "Choose a piece:");
 }
 
 void	paint_menu()

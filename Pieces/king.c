@@ -44,5 +44,6 @@ void	king_creator(int color, int x, int y)
 	king->move = king_range;
 	king->name = "King";
 	king->next = NULL;
+	king->value = 0;
 	add_piece(king);
 }

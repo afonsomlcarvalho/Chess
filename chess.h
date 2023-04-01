@@ -28,6 +28,7 @@ typedef struct s_piece
 	int		color;
 	int		moves;
 	char	*name;
+	int		value;
 	void (*display)(struct s_piece *self);
 	int	(*move)(struct s_piece *self, int x, int y, int flag);
 	struct s_piece *next;

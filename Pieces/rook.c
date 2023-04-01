@@ -40,6 +40,7 @@ void	rook_creator(int color, int x, int y)
 	rook->moves = 0;
 	rook->move = rook_range;
 	rook->name = "Rook";
+	rook->value = 5;
 	rook->next = NULL;
 	add_piece(rook);
 }

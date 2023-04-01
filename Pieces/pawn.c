@@ -49,5 +49,6 @@ void	pawn_creator(int color, int x, int y)
 	pawn->name = "Pawn";
 	pawn->next = NULL;
 	pawn->moves = 0;
+	pawn->value = 1;
 	add_piece(pawn);
 }

@@ -48,12 +48,12 @@ void	select_piece(int x, int y)
 			{
 				(all())->selected = 0;
 				(all())->selected_piece = 0;
-				printf("%s deselected.\n", cur->name);
+				// printf("%s deselected.\n", cur->name);
 				return ;
 			}
 			(all())->selected_piece = cur;
 			(all())->selected = 1;
-			printf("%s selected.\n", cur->name);
+			// printf("%s selected.\n", cur->name);
 			return ;
 		}
 		cur = cur->next;
@@ -103,6 +103,10 @@ void	pawn_trade(int x, int y)
 
 int	move(int button, int x, int y, void *a)
 {
+	if (x < 120 || y < 120 || x > 600 || y > 600)
+		return (0);
+	x -= 120;
+	y -= 120;
 	if (button == 1 && !(all())->selected && !(all())->pawn)
 		select_piece(x / 60, y / 60);
 	else if (button == 1)
@@ -139,8 +143,8 @@ int	end(void *a)
 int	main()
 {
 	(all())->mlx = mlx_init();
-	(all())->wind = mlx_new_window((all())->mlx, 60 * 8, 60 * 8, "Chess");
-	(all())->canva.img = mlx_new_image((all())->mlx, 60 * 8, 60 * 8);
+	(all())->wind = mlx_new_window((all())->mlx, 60 * 12, 60 * 12, "Chess");
+	(all())->canva.img = mlx_new_image((all())->mlx, 60 * 12, 60 * 12);
 	(all())->canva.addr = mlx_get_data_addr((all())->canva.img, &(all())->canva.bpp, &(all())->canva.ll, &(all())->canva.endian);
 	(all())->pawn_pieces[0] = image_creator("Images/WQ.xpm");
 	(all())->pawn_pieces[1] = image_creator("Images/WR.xpm");

@@ -45,12 +45,6 @@ int	check_all_possibilities(int	color)
 			x = 0;
 			while (x < 8)
 			{
-				// if (!strcmp(cur->name, "Pawn") && cur->x == 6 && cur->y == 1)
-				// {
-				// 	printf("x: %d %d\ny: %d %d\nmove: %d\n", cur->x, x, cur->y, y, cur->move(cur, x, y, 0));
-				// 	cur->x = x0;
-				// 	cur->y = y0;
-				// }
 				if ((cur->x != x || cur->y != y) && cur->move(cur, x, y, 0))
 				{
 					cur->x = x0;

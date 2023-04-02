@@ -4,19 +4,21 @@ int	pawn_range(t_piece *pawn, int x, int y, int flag)
 {
 	int	x0;
 	int	y0;
+	int	direction;
 
 	x0 = pawn->x;
 	y0 = pawn->y;
-	if ((pawn->x == x && pawn->y == y + (pawn->color == (all())->turn) - !(pawn->color == (all())->turn) && !is_piece(x, y, -1)) || \
-		(pawn->moves == 0 && pawn->x == x && pawn->y == y + 2 * ((pawn->color == (all())->turn) - !(pawn->color == (all())->turn)) && !is_there_piece_same_line(pawn, x, y, 0)) || \
-		(modulo(pawn->x - x) == 1 && pawn->y == y + (pawn->color == (all())->turn) - !(pawn->color == (all())->turn) && is_piece(x, y, !pawn->color)))
+	direction = (((all())->flip && pawn->color == (all())->turn) || (!(all())->flip && !pawn->color)) - !(((all())->flip && pawn->color == (all())->turn) || (!(all())->flip && !pawn->color));
+	if ((pawn->x == x && pawn->y == y + direction && !is_piece(x, y, -1)) || \
+		(pawn->moves == 0 && pawn->x == x && pawn->y == y + 2 * direction && !is_there_piece_same_line(pawn, x, y, 0)) || \
+		(modulo(pawn->x - x) == 1 && pawn->y == y + direction && is_piece(x, y, !pawn->color)))
 	{
 		if (flag == 1)
 			return (1);
 		pawn->x = x;
 		pawn->y = y;
 	}
-	if ((all())->en_passant && modulo(pawn->x - x) == 1 && pawn->y - y == 1 && pawn->y == 3)
+	if ((all())->en_passant && modulo(pawn->x - x) == 1 && pawn->y - y == direction && pawn->y == 3 + (!(all())->flip && pawn->color))
 		check_en_passant(pawn, x, y);
 	if (!flag && king_in_check(pawn->color, x, y))
 	{

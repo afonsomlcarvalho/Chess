@@ -67,7 +67,7 @@ void	new_turn()
 
 	cur = (all())->pieces;
 	(all())->turn = (all())->turn == 0;
-	while(cur)
+	while((all())->flip && cur)
 	{
 		cur->x = 7 - cur->x;
 		cur->y = 7 - cur->y;
@@ -170,6 +170,7 @@ int	main()
 	(all())->pawn_pieces[6] = image_creator("Images/BB.xpm");
 	(all())->pawn_pieces[7] = image_creator("Images/BKn.xpm");
 	(all())->menu = 1;
+	(all())->flip = 0;
 	pieces_creator();
 	paint();
 	mlx_hook((all())->wind, 4, (1L<<2), move, NULL);

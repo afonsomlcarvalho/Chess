@@ -7,9 +7,9 @@ int	pawn_range(t_piece *pawn, int x, int y, int flag)
 
 	x0 = pawn->x;
 	y0 = pawn->y;
-	if ((x == pawn->x && !is_piece(x, pawn->y - 1, -1) && y >= (pawn->y - 1 - (pawn->moves == 0))\
-		 && y < pawn->y && (modulo(pawn->y - y) == 1 || !is_piece(x, y, -1))) || \
-		(modulo(x - pawn->x) == 1) && is_piece(x, y, !pawn->color) && pawn->y == y + ((all())->turn == pawn->color) - ((all())->turn != pawn->color))
+	if ((pawn->x == x && pawn->y == y + (pawn->color == (all())->turn) - !(pawn->color == (all())->turn) && !is_piece(x, y, -1)) || \
+		(pawn->moves == 0 && pawn->x == x && pawn->y == y + 2 * ((pawn->color == (all())->turn) - !(pawn->color == (all())->turn)) && !is_there_piece_same_line(pawn, x, y, 0)) || \
+		(modulo(pawn->x - x) == 1 && pawn->y == y + (pawn->color == (all())->turn) - !(pawn->color == (all())->turn) && is_piece(x, y, !pawn->color)))
 	{
 		if (flag == 1)
 			return (1);

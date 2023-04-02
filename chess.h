@@ -68,6 +68,7 @@ void	check_castle(t_piece *king, int x, int y);
 void	check_en_passant(t_piece *pawn, int x, int y);
 void	check();
 void	free_all();
+int		end(void *a);
 
 void	knight_creator(int color, int x, int y);
 void	bishop_creator(int color, int x, int y);

@@ -40,11 +40,11 @@ void	paint_floor()
 		{
 			if ((all())->selected && x / 60 == (all())->selected_piece->x && y / 60 == (all())->selected_piece->y)
 				my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x0092e364);
-			// else if ((all())->selected && (all())->selected_piece->move((all())->selected_piece, x / 60, y / 60, 1) && \
-			// ((!((x / 60) % 2) && !((y / 60) % 2)) || (((x / 60) % 2) && ((y / 60)% 2))))
-			// 	my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x009c7e60);
-			// else if ((all())->selected && (all())->selected_piece->move((all())->selected_piece, x / 60, y / 60, 1))
-			// 	my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x007d532a);
+			else if ((all())->selected && (all())->selected_piece->move((all())->selected_piece, x / 60, y / 60, 1) && \
+			((!((x / 60) % 2) && !((y / 60) % 2)) || (((x / 60) % 2) && ((y / 60)% 2))))
+				my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x009c7e60);
+			else if ((all())->selected && (all())->selected_piece->move((all())->selected_piece, x / 60, y / 60, 1))
+				my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x007d532a);
 			else if ((!((x / 60) % 2) && !((y / 60) % 2)) || (((x / 60) % 2) && ((y / 60)% 2)))
 				my_mlx_pixel_put(&(all())->canva, x + 120, y + 120, 0x00ffce9e);
 			else
@@ -130,12 +130,20 @@ void	paint_menu()
 		x = 0;
 		while (x < 60 * 12)
 		{
-			my_mlx_pixel_put(&(all())->canva, x, y, 0x00ffce9e);
+			if (x > 180 && x < 540 && ((y > 240 && y < 310) || (y > 380 && y < 450) || (y > 520 && y < 590)))
+				my_mlx_pixel_put(&(all())->canva, x, y, 0x00d18b47);
+			else
+				my_mlx_pixel_put(&(all())->canva, x, y, 0x00ffce9e);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window((all())->mlx, (all())->wind, (all())->canva.img, x, y);
+	mlx_put_image_to_window((all())->mlx, (all())->wind, (all())->canva.img, 0, 0);
+	mlx_string_put((all())->mlx, (all())->wind, 340, 120, 0x00000000, "Chess");
+	mlx_string_put((all())->mlx, (all())->wind, 300, 135, 0x00000000, "By Afonso Carvalho");
+	mlx_string_put((all())->mlx, (all())->wind, 350, 280, 0x00ffffff, "Play");
+	mlx_string_put((all())->mlx, (all())->wind, 340, 420, 0x00ffffff, "Settings");
+	mlx_string_put((all())->mlx, (all())->wind, 350, 560, 0x00ffffff, "Quit");
 }
 
 void	paint()
@@ -144,6 +152,18 @@ void	paint()
 
 	if ((all())->menu)
 		return (paint_menu());
+	int	x = 0;
+	int	y = 0;
+	while (y < 60 * 12)
+	{
+		x = 0;
+		while (x < 60 * 12)
+		{
+			my_mlx_pixel_put(&(all())->canva, x, y, 0);
+			x++;
+		}
+		y++;
+	}
 	if ((all())->pawn)
 		return (paint_pawn_menu());
 	paint_floor();

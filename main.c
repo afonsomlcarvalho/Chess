@@ -101,15 +101,15 @@ void	pawn_trade(int x, int y)
 	new_turn();
 }
 
-int	move(int button, int x, int y, void *a)
+void	in_game(int x, int y)
 {
 	if (x < 120 || y < 120 || x > 600 || y > 600)
-		return (0);
+		return ;
 	x -= 120;
 	y -= 120;
-	if (button == 1 && !(all())->selected && !(all())->pawn)
+	if (!(all())->selected && !(all())->pawn)
 		select_piece(x / 60, y / 60);
-	else if (button == 1)
+	else
 	{
 		if ((all())->pawn)
 			pawn_trade(x, y);
@@ -130,6 +130,21 @@ int	move(int button, int x, int y, void *a)
 		else
 			printf("%s can not move there.\n", (all())->selected_piece->name);
 	}
+}
+
+int	move(int button, int x, int y, void *a)
+{
+	if ((all())->menu)
+	{
+		if (x < 180 || x > 540)
+			return (0);
+		if (y > 240 && y < 310)
+			(all())->menu = 0;
+		else if (y > 520 && y < 590)
+			end(a);
+	}
+	else if (button == 1)
+		in_game(x, y);
 	paint();
 	return (0);
 }

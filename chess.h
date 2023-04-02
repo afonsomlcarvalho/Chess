@@ -66,7 +66,7 @@ int		is_piece(int x, int y, int color);
 int		king_in_check(int color, int x, int y);
 void	eat(int x, int y, int color);
 void	check_castle(t_piece *king, int x, int y);
-void	check_en_passant(t_piece *pawn, int x, int y);
+int		check_en_passant(t_piece *pawn, int x, int y, int flag);
 void	check();
 void	free_all();
 int		end(void *a);

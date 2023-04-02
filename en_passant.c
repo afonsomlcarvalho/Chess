@@ -1,6 +1,6 @@
 #include "chess.h"
 
-void	check_en_passant(t_piece *pawn, int x, int y)
+int	check_en_passant(t_piece *pawn, int x, int y, int flag)
 {
 	t_piece *cur;
 
@@ -9,10 +9,13 @@ void	check_en_passant(t_piece *pawn, int x, int y)
 	{
 		if (!strncmp("Pawn", cur->name, strlen(cur->name)) && cur->x == x && cur->y == pawn->y && cur->color == !pawn->color)
 		{
+			if (flag)
+				return (1);
 			pawn->x = x;
 			pawn->y = y;
 			eat(x, cur->y, cur->color);
 		}
 		cur = cur->next;
 	}
+	return (0);
 }

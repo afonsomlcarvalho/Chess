@@ -19,7 +19,10 @@ int	pawn_range(t_piece *pawn, int x, int y, int flag)
 		pawn->y = y;
 	}
 	if ((all())->en_passant && modulo(pawn->x - x) == 1 && pawn->y - y == direction && pawn->y == 3 + (!(all())->flip && pawn->color))
-		check_en_passant(pawn, x, y);
+	{
+		if (check_en_passant(pawn, x, y, flag) && flag)
+			return (1);
+	}
 	if (!flag && king_in_check(pawn->color, x, y))
 	{
 		pawn->x = x0;

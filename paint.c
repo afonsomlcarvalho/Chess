@@ -119,12 +119,41 @@ void	paint_pawn_menu()
 	mlx_string_put((all())->mlx, (all())->wind, 320, 210, 0x00ffffff, "Choose a piece:");
 }
 
+void	paint_settings()
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < 60 * 12)
+	{
+		x = 0;
+		while (x < 60 * 12)
+		{
+			if (x > 120 && x < 600 && ((y > 120 && y < 190) || (y > 550 && y < 620)))
+				my_mlx_pixel_put(&(all())->canva, x, y, 0x00d18b47);
+			else
+				my_mlx_pixel_put(&(all())->canva, x, y, 0x00ffce9e);
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window((all())->mlx, (all())->wind, (all())->canva.img, 0, 0);
+	if ((all())->flip)
+		mlx_string_put((all())->mlx, (all())->wind, 160, 160, 0x00ffffff, "Flip board: ON");
+	else
+		mlx_string_put((all())->mlx, (all())->wind, 160, 160, 0x00ffffff, "Flip board: OFF");
+	mlx_string_put((all())->mlx, (all())->wind, 160, 590, 0x00ffffff, "Back to menu");
+}
+
 void	paint_menu()
 {
 	int	x;
 	int	y;
 
 	y = 0;
+	if ((all())->menu == 2)
+		return (paint_settings());
 	while (y < 60 * 12)
 	{
 		x = 0;

@@ -134,14 +134,25 @@ void	in_game(int x, int y)
 
 int	move(int button, int x, int y, void *a)
 {
-	if ((all())->menu)
+	if ((all())->menu == 1)
 	{
 		if (x < 180 || x > 540)
 			return (0);
 		if (y > 240 && y < 310)
 			(all())->menu = 0;
+		else if (y > 380 && y < 450)
+			(all())->menu = 2;
 		else if (y > 520 && y < 590)
 			end(a);
+	}
+	else if ((all())->menu == 2)
+	{
+		if (x < 120 || x > 600)
+			return (0);
+		if (y > 120 && y < 190)
+			(all())->flip = (all())->flip == 0;
+		if (y > 550 && y < 620)
+			(all())->menu = 1;
 	}
 	else if (button == 1)
 		in_game(x, y);

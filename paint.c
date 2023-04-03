@@ -175,6 +175,47 @@ void	paint_menu()
 	mlx_string_put((all())->mlx, (all())->wind, 350, 560, 0x00ffffff, "Quit");
 }
 
+void	display_score()
+{
+	char	*str[2];
+
+	str[0] = ft_itoa((all())->score[0]);
+	str[1] = ft_itoa((all())->score[1]);
+	mlx_string_put((all())->mlx, (all())->wind, 130, 70, 0xffffffff, str[0]);
+	mlx_string_put((all())->mlx, (all())->wind, 430, 70, 0x00000000, str[1]);
+	free(str[0]);
+	free(str[1]);
+}
+
+void	display_dead()
+{
+	t_piece	*cur;
+	int	y[2];
+	int	x[2];
+
+	x[0] = 620;
+	y[0] = 130;
+	x[1] = 20;
+	y[1] = 130;
+	cur = (all())->dead;
+	while (cur)
+	{
+		if (x[0] == 700)
+		{
+			x[0] = 620;
+			y[0] += 60;
+		}
+		if (x[1] == 100)
+		{
+			x[1] = 20;
+			y[1] += 60;
+		}
+		display_image(cur->img, x[cur->color], y[cur->color]);
+		x[cur->color] += 40;
+		cur = cur->next;
+	}
+}
+
 void	paint()
 {
 	t_piece	*cur;
@@ -188,7 +229,7 @@ void	paint()
 		x = 0;
 		while (x < 60 * 12)
 		{
-			my_mlx_pixel_put(&(all())->canva, x, y, 0);
+			my_mlx_pixel_put(&(all())->canva, x, y, 0x00f7cb2d);
 			x++;
 		}
 		y++;
@@ -202,5 +243,7 @@ void	paint()
 		cur->display(cur);
 		cur = cur->next;
 	}
+	display_dead();
 	mlx_put_image_to_window((all())->mlx, (all())->wind, (all())->canva.img, 0, 0);
+	display_score();
 }

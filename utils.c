@@ -78,6 +78,22 @@ int	is_there_piece_same_line(t_piece *piece, int x, int y, int flag)
 	return (0);
 }
 
+void	update_score(void)
+{
+	(all())->score[!last(1)->color] += last(1)->value;
+}
+
+void	add_dead(t_piece *to_add)
+{
+	t_piece *cur;
+
+	if (!(all())->dead)
+		(all())->dead = to_add;
+	else
+		last(1)->next = to_add;
+	update_score();
+}
+
 void	eat(int x, int y, int color)
 {
 	t_piece	*cur;
@@ -87,8 +103,8 @@ void	eat(int x, int y, int color)
 	if (cur->color == color && cur->x == x && cur->y == y)
 	{
 		(all())->pieces = cur->next;
-		mlx_destroy_image((all())->mlx, cur->img.img);
-		free(cur);
+		cur->next = NULL;
+		add_dead(cur);
 		return ;
 	}
 	while (cur->next)
@@ -96,11 +112,33 @@ void	eat(int x, int y, int color)
 		if (cur->next->color == color && cur->next->x == x && cur->next->y == y)
 		{
 			temp = cur->next->next;
-			mlx_destroy_image((all())->mlx, cur->next->img.img);
-			free(cur->next);
+			cur->next->next = NULL;
+			add_dead(cur->next);
 			cur->next = temp;
 			break ;
 		}
 		cur = cur->next;
 	}
+}
+
+char	*ft_itoa(int n)
+{
+	int	c = 1;
+	int	i = 0;
+	int	nbr = n;
+	char	*str;
+
+	while (nbr > 9)
+	{
+		c++;
+		nbr /= 10;
+	}
+	str = malloc(c + 1);
+	str[c] = 0;
+	while (--c >= 0)
+	{
+		str[c] = '0' + (n % 10);
+		n /= 10;
+	}
+	return (str);
 }

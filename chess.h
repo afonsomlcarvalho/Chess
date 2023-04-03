@@ -48,6 +48,8 @@ typedef struct	s_all
 	t_img	pawn_pieces[8];
 	int		menu;
 	int		flip;
+	t_piece	*dead;
+	int		score[2];
 }				t_all;
 
 # define WHITE 0
@@ -70,6 +72,8 @@ int		check_en_passant(t_piece *pawn, int x, int y, int flag);
 void	check();
 void	free_all();
 int		end(void *a);
+t_piece	*last(int flag);
+char	*ft_itoa(int n);
 
 void	knight_creator(int color, int x, int y);
 void	bishop_creator(int color, int x, int y);

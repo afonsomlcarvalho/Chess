@@ -32,7 +32,7 @@ int	pawn_range(t_piece *pawn, int x, int y, int flag)
 		(all())->en_passant = 1;
 	else if (!flag && pawn->x == x && pawn->y == y)
 		(all())->en_passant = 0;
-	if (!flag && pawn->y == 0)
+	if (!flag && (pawn->y == 0 || pawn->y == 7))
 		(all())->pawn = 1;
 	return (pawn->x == x && pawn->y == y);
 }

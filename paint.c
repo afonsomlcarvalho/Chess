@@ -131,19 +131,19 @@ void	paint_settings()
 		while (x < 60 * 12)
 		{
 			if (x > 120 && x < 600 && ((y > 120 && y < 190) || (y > 550 && y < 620)))
-				my_mlx_pixel_put(&(all())->canva, x, y, 0x00d18b47);
+				my_mlx_pixel_put(&(all())->canva, x, y, 0x00e6cfd9);
 			else
-				my_mlx_pixel_put(&(all())->canva, x, y, 0x00ffce9e);
+				my_mlx_pixel_put(&(all())->canva, x, y, 0x00d17da4);
 			x++;
 		}
 		y++;
 	}
 	mlx_put_image_to_window((all())->mlx, (all())->wind, (all())->canva.img, 0, 0);
 	if ((all())->flip)
-		mlx_string_put((all())->mlx, (all())->wind, 160, 160, 0x00ffffff, "Flip board: ON");
+		mlx_string_put((all())->mlx, (all())->wind, 160, 160, 0x00000000, "Flip board: ON");
 	else
-		mlx_string_put((all())->mlx, (all())->wind, 160, 160, 0x00ffffff, "Flip board: OFF");
-	mlx_string_put((all())->mlx, (all())->wind, 160, 590, 0x00ffffff, "Back to menu");
+		mlx_string_put((all())->mlx, (all())->wind, 160, 160, 0x00000000, "Flip board: OFF");
+	mlx_string_put((all())->mlx, (all())->wind, 160, 590, 0x00000000, "Back to menu");
 }
 
 void	paint_menu()
@@ -160,9 +160,9 @@ void	paint_menu()
 		while (x < 60 * 12)
 		{
 			if (x > 180 && x < 540 && ((y > 240 && y < 310) || (y > 380 && y < 450) || (y > 520 && y < 590)))
-				my_mlx_pixel_put(&(all())->canva, x, y, 0x00d18b47);
+				my_mlx_pixel_put(&(all())->canva, x, y, 0x00e6cfd9);
 			else
-				my_mlx_pixel_put(&(all())->canva, x, y, 0x00ffce9e);
+				my_mlx_pixel_put(&(all())->canva, x, y, 0x00d17da4);
 			x++;
 		}
 		y++;
@@ -170,9 +170,9 @@ void	paint_menu()
 	mlx_put_image_to_window((all())->mlx, (all())->wind, (all())->canva.img, 0, 0);
 	mlx_string_put((all())->mlx, (all())->wind, 340, 120, 0x00000000, "Chess");
 	mlx_string_put((all())->mlx, (all())->wind, 300, 135, 0x00000000, "By Afonso Carvalho");
-	mlx_string_put((all())->mlx, (all())->wind, 350, 280, 0x00ffffff, "Play");
-	mlx_string_put((all())->mlx, (all())->wind, 340, 420, 0x00ffffff, "Settings");
-	mlx_string_put((all())->mlx, (all())->wind, 350, 560, 0x00ffffff, "Quit");
+	mlx_string_put((all())->mlx, (all())->wind, 350, 280, 0x00000000, "Play");
+	mlx_string_put((all())->mlx, (all())->wind, 340, 420, 0x00000000, "Settings");
+	mlx_string_put((all())->mlx, (all())->wind, 350, 560, 0x00000000, "Quit");
 }
 
 void	display_score()
@@ -229,7 +229,7 @@ void	paint()
 		x = 0;
 		while (x < 60 * 12)
 		{
-			my_mlx_pixel_put(&(all())->canva, x, y, 0x00f7cb2d);
+			my_mlx_pixel_put(&(all())->canva, x, y, 0x00d17da4);
 			x++;
 		}
 		y++;

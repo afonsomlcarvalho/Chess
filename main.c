@@ -89,13 +89,14 @@ void	pawn_trade(int x, int y)
 	eat((all())->selected_piece->x, (all())->selected_piece->y, (all())->selected_piece->color);
 	if (x <= 240 && y <= 240)
 		queen_creator(color, x0, y0);
-	if (x <= 240 && y > 240)
+	else if (x <= 240 && y > 240)
 		rook_creator(color, x0, y0);
-	if (x > 240 && y <= 240)
+	else if (x > 240 && y <= 240)
 		bishop_creator(color, x0, y0);
-	if (x > 240 && y > 240)
+	else if (x > 240 && y > 240)
 		knight_creator(color, x0, y0);
 	(all())->pawn = 0;
+
 	paint();
 	check();
 	new_turn();
@@ -113,7 +114,7 @@ void	in_game(int x, int y)
 	{
 		if ((all())->pawn)
 			pawn_trade(x, y);
-		if (is_piece(x / 60, y / 60, (all())->selected_piece->color))
+		else if (is_piece(x / 60, y / 60, (all())->selected_piece->color))
 			select_piece(x / 60, y / 60);
 		else if ((all())->selected_piece->move((all())->selected_piece, x / 60, y / 60, 0))
 		{

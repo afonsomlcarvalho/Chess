@@ -73,6 +73,7 @@ void	new_turn()
 		cur->y = 7 - cur->y;
 		cur = cur->next;
 	}
+	(all())->start = get_time();
 }
 
 void	pawn_trade(int x, int y)
@@ -140,7 +141,10 @@ int	move(int button, int x, int y, void *a)
 		if (x < 180 || x > 540)
 			return (0);
 		if (y > 240 && y < 310)
+		{
 			(all())->menu = 0;
+			(all())->start = get_time();
+		}
 		else if (y > 380 && y < 450)
 			(all())->menu = 2;
 		else if (y > 520 && y < 590)
@@ -182,9 +186,13 @@ int	main()
 	(all())->pawn_pieces[6] = image_creator("Images/BB.xpm");
 	(all())->pawn_pieces[7] = image_creator("Images/BKn.xpm");
 	(all())->menu = 1;
+	(all())->time[0] = 25 * 60 * 1000;
+	(all())->time[1] = 25 * 60 * 1000;
+	(all())->start = get_time();
 	pieces_creator();
 	paint();
 	mlx_hook((all())->wind, 4, (1L<<2), move, NULL);
 	mlx_hook((all())->wind, 17, 0, end, NULL);
+	mlx_loop_hook((all())->mlx, update_time, NULL);
 	mlx_loop((all())->mlx);
 }

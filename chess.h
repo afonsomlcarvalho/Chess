@@ -6,6 +6,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <string.h>
+# include <sys/time.h>
 # include "mlx_linux/mlx.h"
 
 typedef struct s_img
@@ -50,6 +51,8 @@ typedef struct	s_all
 	int		flip;
 	t_piece	*dead;
 	int		score[2];
+	time_t	time[2];
+	time_t	start;
 }				t_all;
 
 # define WHITE 0
@@ -74,6 +77,8 @@ void	free_all();
 int		end(void *a);
 t_piece	*last(int flag);
 char	*ft_itoa(int n);
+time_t	get_time(void);
+int		update_time(void *a);
 
 void	knight_creator(int color, int x, int y);
 void	bishop_creator(int color, int x, int y);

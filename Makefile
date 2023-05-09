@@ -9,7 +9,8 @@ SRCS = 	main.c \
 		free.c \
 		castle.c \
 		en_passant.c \
-		check.c
+		check.c \
+		time.c
 
 SRCS_PCS =	bishop.c \
 			knight.c \

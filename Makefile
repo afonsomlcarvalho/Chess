@@ -1,6 +1,6 @@
 NAME = chess
 
-COMPILER = cc -Wall -Werror -Wextra
+COMPILER = cc -Wall -Werror -Wextra #-g -fsanitize=address
 
 SRCS = 	main.c \
 		paint.c \
@@ -10,7 +10,8 @@ SRCS = 	main.c \
 		castle.c \
 		en_passant.c \
 		check.c \
-		time.c
+		time.c \
+		string_put.c
 
 SRCS_PCS =	bishop.c \
 			knight.c \
@@ -34,5 +35,8 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+
+r:
+	make re && clear && ./chess
 
 re: fclean all

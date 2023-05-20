@@ -1,5 +1,7 @@
 #include "chess.h"
 
+t_all	all;
+
 void	pieces_creator()
 {
 	int	i;
@@ -31,12 +33,12 @@ void	select_piece(int x, int y)
 {
 	t_piece	*cur;
 
-	cur = (all())->pieces;
+	cur = all.pieces;
 	while (cur)
 	{
 		if (cur->x == x && cur->y == y)
 		{
-			if (cur->color != (all())->turn)
+			if (cur->color != all.turn)
 			{
 				if (!cur->color)
 					printf("It's black's turn.\n");
@@ -44,15 +46,15 @@ void	select_piece(int x, int y)
 					printf("It's white's turn.\n");
 				return ;
 			}
-			if ((all())->selected_piece && cur->x == (all())->selected_piece->x && cur->y == (all())->selected_piece->y)
+			if (all.selected_piece && cur->x == all.selected_piece->x && cur->y == all.selected_piece->y)
 			{
-				(all())->selected = 0;
-				(all())->selected_piece = 0;
+				all.selected = 0;
+				all.selected_piece = 0;
 				// printf("%s deselected.\n", cur->name);
 				return ;
 			}
-			(all())->selected_piece = cur;
-			(all())->selected = 1;
+			all.selected_piece = cur;
+			all.selected = 1;
 			// printf("%s selected.\n", cur->name);
 			return ;
 		}
@@ -65,15 +67,15 @@ void	new_turn()
 {
 	t_piece *cur;
 
-	cur = (all())->pieces;
-	(all())->turn = (all())->turn == 0;
-	while((all())->flip && cur)
+	cur = all.pieces;
+	all.turn = all.turn == 0;
+	while(all.flip && cur)
 	{
 		cur->x = 7 - cur->x;
 		cur->y = 7 - cur->y;
 		cur = cur->next;
 	}
-	(all())->start = get_time();
+	all.start = get_time();
 }
 
 void	pawn_trade(int x, int y)
@@ -84,10 +86,10 @@ void	pawn_trade(int x, int y)
 
 	if (x < 120 || x > 360 || y < 120 || y > 360)
 		return ;
-	x0 = (all())->selected_piece->x;
-	y0 = (all())->selected_piece->y;
-	color = (all())->selected_piece->color;
-	eat((all())->selected_piece->x, (all())->selected_piece->y, (all())->selected_piece->color);
+	x0 = all.selected_piece->x;
+	y0 = all.selected_piece->y;
+	color = all.selected_piece->color;
+	eat(all.selected_piece->x, all.selected_piece->y, all.selected_piece->color);
 	if (x <= 240 && y <= 240)
 		queen_creator(color, x0, y0);
 	else if (x <= 240 && y > 240)
@@ -96,7 +98,7 @@ void	pawn_trade(int x, int y)
 		bishop_creator(color, x0, y0);
 	else if (x > 240 && y > 240)
 		knight_creator(color, x0, y0);
-	(all())->pawn = 0;
+	all.pawn = 0;
 
 	paint();
 	check();
@@ -109,55 +111,55 @@ void	in_game(int x, int y)
 		return ;
 	x -= 120;
 	y -= 120;
-	if (!(all())->selected && !(all())->pawn)
+	if (!all.selected && !all.pawn)
 		select_piece(x / 60, y / 60);
 	else
 	{
-		if ((all())->pawn)
+		if (all.pawn)
 			pawn_trade(x, y);
-		else if (is_piece(x / 60, y / 60, (all())->selected_piece->color))
+		else if (is_piece(x / 60, y / 60, all.selected_piece->color))
 			select_piece(x / 60, y / 60);
-		else if ((all())->selected_piece->move((all())->selected_piece, x / 60, y / 60, 0))
+		else if (all.selected_piece->move(all.selected_piece, x / 60, y / 60, 0))
 		{
-			(all())->selected = 0;
-			(all())->selected_piece->moves++;
-			if (is_piece(x / 60, y / 60, !(all())->selected_piece->color))
-				eat(x / 60, y / 60, !(all())->selected_piece->color);
-			if (!(all())->pawn)
+			all.selected = 0;
+			all.selected_piece->moves++;
+			if (is_piece(x / 60, y / 60, !all.selected_piece->color))
+				eat(x / 60, y / 60, !all.selected_piece->color);
+			if (!all.pawn)
 			{
 				check();
 				new_turn();
 			}
 		}
 		else
-			printf("%s can not move there.\n", (all())->selected_piece->name);
+			printf("%s can not move there.\n", all.selected_piece->name);
 	}
 }
 
 int	move(int button, int x, int y, void *a)
 {
-	if ((all())->menu == 1)
+	if (all.menu == 1)
 	{
 		if (x < 180 || x > 540)
 			return (0);
 		if (y > 240 && y < 310)
 		{
-			(all())->menu = 0;
-			(all())->start = get_time();
+			all.menu = 0;
+			all.start = get_time();
 		}
 		else if (y > 380 && y < 450)
-			(all())->menu = 2;
+			all.menu = 2;
 		else if (y > 520 && y < 590)
 			end(a);
 	}
-	else if ((all())->menu == 2)
+	else if (all.menu == 2)
 	{
 		if (x < 120 || x > 600)
 			return (0);
 		if (y > 120 && y < 190)
-			(all())->flip = (all())->flip == 0;
+			all.flip = all.flip == 0;
 		if (y > 550 && y < 620)
-			(all())->menu = 1;
+			all.menu = 1;
 	}
 	else if (button == 1)
 		in_game(x, y);
@@ -173,26 +175,31 @@ int	end(void *a)
 
 int	main()
 {
-	(all())->mlx = mlx_init();
-	(all())->wind = mlx_new_window((all())->mlx, 60 * 12, 60 * 12, "Chess");
-	(all())->canva.img = mlx_new_image((all())->mlx, 60 * 12, 60 * 12);
-	(all())->canva.addr = mlx_get_data_addr((all())->canva.img, &(all())->canva.bpp, &(all())->canva.ll, &(all())->canva.endian);
-	(all())->pawn_pieces[0] = image_creator("Images/WQ.xpm");
-	(all())->pawn_pieces[1] = image_creator("Images/WR.xpm");
-	(all())->pawn_pieces[2] = image_creator("Images/WB.xpm");
-	(all())->pawn_pieces[3] = image_creator("Images/WKn.xpm");
-	(all())->pawn_pieces[4] = image_creator("Images/BQ.xpm");
-	(all())->pawn_pieces[5] = image_creator("Images/BR.xpm");
-	(all())->pawn_pieces[6] = image_creator("Images/BB.xpm");
-	(all())->pawn_pieces[7] = image_creator("Images/BKn.xpm");
-	(all())->menu = 1;
-	(all())->time[0] = 25 * 60 * 1000;
-	(all())->time[1] = 25 * 60 * 1000;
-	(all())->start = get_time();
+	all.mlx = mlx_init();
+	all.wind = mlx_new_window(all.mlx, 60 * 12, 60 * 12, "Chess");
+	all.canva.img = mlx_new_image(all.mlx, 60 * 12, 60 * 12);
+	all.canva.addr = mlx_get_data_addr(all.canva.img, &all.canva.bpp, &all.canva.ll, &all.canva.endian);
+	all.pawn_pieces[0] = image_creator("Images/WQ.xpm");
+	all.pawn_pieces[1] = image_creator("Images/WR.xpm");
+	all.pawn_pieces[2] = image_creator("Images/WB.xpm");
+	all.pawn_pieces[3] = image_creator("Images/WKn.xpm");
+	all.pawn_pieces[4] = image_creator("Images/BQ.xpm");
+	all.pawn_pieces[5] = image_creator("Images/BR.xpm");
+	all.pawn_pieces[6] = image_creator("Images/BB.xpm");
+	all.pawn_pieces[7] = image_creator("Images/BKn.xpm");
+	all.alpha_num[0] = image_creator("alpha/0.xpm");
+	all.menu = 1;
+	all.time[0] = 25 * 60 * 1000;
+	all.time[1] = 25 * 60 * 1000;
+	all.start = get_time();
 	pieces_creator();
-	paint();
-	mlx_hook((all())->wind, 4, (1L<<2), move, NULL);
-	mlx_hook((all())->wind, 17, 0, end, NULL);
-	mlx_loop_hook((all())->mlx, update_time, NULL);
-	mlx_loop((all())->mlx);
+	load_alpha_num();
+	display_letter(500, 500, all.alpha_num[0], 0xff0000, 0.1);
+	display_letter(250, 250, all.alpha_num[0], 0xff0000, 1);
+	mlx_put_image_to_window(all.mlx, all.wind, all.canva.img, 0, 0);
+	// paint();
+	mlx_hook(all.wind, 4, (1L<<2), move, NULL);
+	mlx_hook(all.wind, 17, 0, end, NULL);
+	mlx_loop_hook(all.mlx, update_time, NULL);
+	mlx_loop(all.mlx);
 }

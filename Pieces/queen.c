@@ -21,7 +21,7 @@ int	queen_range(t_piece *queen, int x, int y, int flag)
 		queen->y = y0;
 	}
 	if (queen->x == x && queen->y == y)
-		(all())->en_passant = 0;
+		all.en_passant = 0;
 	return (queen->x == x && queen->y == y);
 }
 

@@ -1,17 +1,10 @@
 #include "chess.h"
 
-t_all	*all(void)
-{
-	static t_all	a;
-
-	return (&a);
-}
-
 t_img	image_creator(char *path)
 {
 	t_img	img;
 
-	img.img = mlx_xpm_file_to_image((all())->mlx, path, &img.width, &img.height);
+	img.img = mlx_xpm_file_to_image(all.mlx, path, &img.width, &img.height);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.ll, &img.endian);
 	return (img);
 }
@@ -25,7 +18,7 @@ int	is_piece(int x, int y, int color)
 {
 	t_piece	*cur;
 
-	cur = (all())->pieces;
+	cur = all.pieces;
 	while (cur)
 	{
 		if (cur->x == x && cur->y == y && (color == -1 || cur->color == color))
@@ -80,15 +73,15 @@ int	is_there_piece_same_line(t_piece *piece, int x, int y, int flag)
 
 void	update_score(void)
 {
-	(all())->score[!last(1)->color] += last(1)->value;
+	all.score[!last(1)->color] += last(1)->value;
 }
 
 void	add_dead(t_piece *to_add)
 {
 	t_piece *cur;
 
-	if (!(all())->dead)
-		(all())->dead = to_add;
+	if (!all.dead)
+		all.dead = to_add;
 	else
 		last(1)->next = to_add;
 	update_score();
@@ -99,10 +92,10 @@ void	eat(int x, int y, int color)
 	t_piece	*cur;
 	t_piece	*temp;
 
-	cur = (all())->pieces;
+	cur = all.pieces;
 	if (cur->color == color && cur->x == x && cur->y == y)
 	{
-		(all())->pieces = cur->next;
+		all.pieces = cur->next;
 		cur->next = NULL;
 		add_dead(cur);
 		return ;

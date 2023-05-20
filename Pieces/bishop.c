@@ -20,7 +20,7 @@ int	bishop_range(t_piece *bishop, int x, int y, int flag)
 		bishop->y = y0;
 	}
 	if (bishop->x == x && bishop->y == y)
-		(all())->en_passant = 0;
+		all.en_passant = 0;
 	return (bishop->x == x && bishop->y == y);
 }
 

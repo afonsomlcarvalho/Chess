@@ -13,11 +13,11 @@ char	*convert_time(int color)
 	char	*str;
 
 	str = malloc(6);
-	str[0] = '0' + (all())->time[color] / 1000 / 60 / 10;
-	str[1] = '0' + ((all())->time[color] / 1000 / 60) % 10;
+	str[0] = '0' + all.time[color] / 1000 / 60 / 10;
+	str[1] = '0' + (all.time[color] / 1000 / 60) % 10;
 	str[2] = ':';
-	str[3] = '0' + (((all())->time[color] / 1000) % 60) / 10;
-	str[4] = '0' + (((all())->time[color] / 1000) % 60) % 10;
+	str[3] = '0' + ((all.time[color] / 1000) % 60) / 10;
+	str[4] = '0' + ((all.time[color] / 1000) % 60) % 10;
 	str[5] = 0;
 	return (str);
 }
@@ -31,8 +31,8 @@ int	update_time(void *a)
 
 	if (get_time() > timer)
 	{
-		(all())->time[(all())->turn] -= get_time() - (all())->start;
-		(all())->start = get_time();
+		all.time[all.turn] -= get_time() - all.start;
+		all.start = get_time();
 		timer = get_time() + 500;
 	}
 	if (get_time() > timer2)
@@ -44,4 +44,5 @@ int	update_time(void *a)
 		free(t1);
 		free(t2);
 	}
+	return (0);
 }

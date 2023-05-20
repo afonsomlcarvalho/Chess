@@ -5,8 +5,8 @@ int	king_in_check(int color, int x, int y)
 	t_piece	*king;
 	t_piece	*cur;
 
-	king = (all())->pieces;
-	cur = (all())->pieces;
+	king = all.pieces;
+	cur = all.pieces;
 	while (king)
 	{
 		if (king->color == color && !strncmp(king->name, "King", strlen(king->name)))
@@ -32,9 +32,9 @@ int	check_all_possibilities(int	color)
 	int	en_passant;
 	int	pawn;
 
-	en_passant = (all())->en_passant;
-	pawn = (all())->pawn;
-	cur = (all())->pieces;
+	en_passant = all.en_passant;
+	pawn = all.pawn;
+	cur = all.pieces;
 	while (cur)
 	{
 		y = 0;
@@ -49,8 +49,8 @@ int	check_all_possibilities(int	color)
 				{
 					cur->x = x0;
 					cur->y = y0;
-					(all())->en_passant = en_passant;
-					(all())->pawn = pawn;
+					all.en_passant = en_passant;
+					all.pawn = pawn;
 					return (1);
 				}
 				x++;
@@ -64,10 +64,10 @@ int	check_all_possibilities(int	color)
 
 void	check()
 {
-	if (!check_all_possibilities(!(all())->selected_piece->color) && king_in_check(!(all())->selected_piece->color, -1, -1))
+	if (!check_all_possibilities(!all.selected_piece->color) && king_in_check(!all.selected_piece->color, -1, -1))
 		printf("Checkmate!\n");
-	else if (!check_all_possibilities(!(all())->selected_piece->color))
+	else if (!check_all_possibilities(!all.selected_piece->color))
 		printf("Stalemate!\n");
-	else if (king_in_check(!(all())->selected_piece->color, -1, -1))
+	else if (king_in_check(!all.selected_piece->color, -1, -1))
 		printf("Check!\n");
 }

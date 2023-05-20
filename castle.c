@@ -4,7 +4,7 @@ int	check_pieces_in_between(t_piece *king, int x, int y)
 {
 	t_piece	*cur;
 
-	cur = (all())->pieces;
+	cur = all.pieces;
 	while (cur)
 	{
 		if ((king->x > x && (cur->x == 1 || cur->x == 2 || (cur->x == 3 && !king->color)) && cur->y == y) || \
@@ -22,7 +22,7 @@ int	no_threat(t_piece *king, int x, int y)
 
 	for (i = 2 + 3 * (x > king->x) - king->color; i < 4 + 3 * (x > king->x) - king->color; i++)
 	{
-		cur = (all())->pieces;
+		cur = all.pieces;
 		while (cur)
 		{
 			if (cur->color == !king->color && cur->move(cur, i, y, 1))
@@ -37,7 +37,7 @@ void	check_castle(t_piece *king, int x, int y)
 {
 	t_piece	*rook;
 
-	rook = (all())->pieces;
+	rook = all.pieces;
 	while (rook)
 	{
 		if (rook->x == 7 * (king->x < x) && rook->y == y && rook->moves == 0 && \

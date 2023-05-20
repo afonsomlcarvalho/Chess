@@ -53,12 +53,14 @@ typedef struct	s_all
 	int		score[2];
 	time_t	time[2];
 	time_t	start;
+	t_img	alpha_num[36];
 }				t_all;
+
+extern t_all	all;
 
 # define WHITE 0
 # define BLACK 1
 
-t_all	*all(void);
 void	paint_floor();
 void	add_piece(t_piece *to_add);
 t_img	image_creator(char *path);
@@ -79,6 +81,8 @@ t_piece	*last(int flag);
 char	*ft_itoa(int n);
 time_t	get_time(void);
 int		update_time(void *a);
+unsigned int	get_color(t_img img, int x, int y);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 void	knight_creator(int color, int x, int y);
 void	bishop_creator(int color, int x, int y);
@@ -86,5 +90,11 @@ void	queen_creator(int color, int x, int y);
 void	pawn_creator(int color, int x, int y);
 void	rook_creator(int color, int x, int y);
 void	king_creator(int color, int x, int y);
+
+int		find_lowest_pixel(t_img	img);
+int		find_leftmost_pixel(t_img img);
+void	display_letter(int i, int j, t_img letter, int color, double size);
+void	load_alpha_num();
+
 
 #endif

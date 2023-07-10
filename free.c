@@ -6,7 +6,7 @@ void	free_all()
 	int	i;
 
 	i = 0;
-	while ((all())->pawn_pieces[i].img)
+	while (i < 8)
 	{
 		mlx_destroy_image((all())->mlx, (all())->pawn_pieces[i].img);
 		i++;

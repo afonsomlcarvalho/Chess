@@ -33,14 +33,12 @@ int	update_time(void *a)
 	{
 		(all())->time[(all())->turn] -= get_time() - (all())->start;
 		(all())->start = get_time();
-		timer = get_time() + 500;
-	}
-	if (get_time() > timer2)
-	{
 		t1 = convert_time(0);
 		t2 = convert_time(1);
-		printf("White time: %s\nBlack time: %s\n\n", t1, t2);
-		timer2 = get_time() + 3000;
+		mlx_put_image_to_window((all())->mlx, (all())->wind, (all())->canva.img, 0, 0);
+		mlx_string_put((all())->mlx, (all())->wind, 50, 50, 0xffffffff, t1);
+		mlx_string_put((all())->mlx, (all())->wind, 50, 150, 0x00000000, t2);
+		timer = get_time() + 500;
 		free(t1);
 		free(t2);
 	}
